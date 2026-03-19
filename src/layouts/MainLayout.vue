@@ -1,14 +1,14 @@
 <template>
   <header>
     <nav>
-      <ul>
-        <li>
+      <ul class="navbar">
+        <li class="navbar-item">
           <RouterLink to="/">Home</RouterLink>
         </li>
-        <li>
+        <li class="navbar-item">
           <RouterLink to="/catalog">Catalog</RouterLink>
         </li>
-        <li>
+        <li class="navbar-item">
           <RouterLink to="/login"> Login </RouterLink>
         </li>
       </ul>
@@ -18,3 +18,14 @@
     <RouterView />
   </main>
 </template>
+
+<style>
+.navbar {
+  display: flex;
+  list-style-type: none;
+}
+
+.navbar-item {
+  margin-right: 10px;
+}
+</style>
