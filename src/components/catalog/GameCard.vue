@@ -4,20 +4,26 @@
     <img :src="game.image" />
     <div class="game-details">
       <p>
-        The platform
-        <span v-if="game.platform.length > 1"> are </span>
-        <span v-else> is </span>
-        <span v-for="value in game.platform" :key="value">{{ value }} </span>
+        The platform is
+        {{ game.platform }}
       </p>
       <p>{{ game.price }} <span class="tenge-span">₸</span></p>
+      <button @click="handleAddToCart">Добавить в корзину</button>
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   game: Object,
 })
+
+const emit = defineEmits(["add-to-cart"])
+
+function handleAddToCart() {
+  emit("add-to-cart", props.game)
+}
+
 </script>
 
 <style>
