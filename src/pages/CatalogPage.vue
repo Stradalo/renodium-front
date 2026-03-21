@@ -1,10 +1,14 @@
 <template>
+  <h1 class="section-name">Game Catalog</h1>
   <GameList :games="games" @add-to-cart="handleAddToCart"/>
+  <Cart :cart="cart" @decrement-item="handleDecrementCartGame" @increment-item="handleIncrementCartGame"/>
 </template>
 
 <script setup>
 import GameList from '../components/catalog/GameList.vue'
+import Cart from '../components/cart/Cart.vue'
 import { ref } from 'vue'
+
 const games = [
   {
     id: 1,
@@ -44,4 +48,32 @@ function handleAddToCart(game) {
   console.log("Cart:", cart.value)
 }
 
+function handleDecrementCartGame(id) {
+  const item = cart.value.find(c => c.game.id === id)
+  if (!item) {
+    return
+  }
+  const index = cart.value.indexOf(item)
+  if (item.quantity === 1) {
+    cart.value.splice(index, 1)
+  }
+  else {
+    item.quantity -= 1
+  }
+}
+
+function handleIncrementCartGame(id) {
+  const item = cart.value.find(c => c.game.id === id)
+  if (!item) {
+    return
+  }
+  item.quantity += 1
+}
+
 </script>
+
+<style>
+.section-name {
+  text-align: center;
+}
+</style>

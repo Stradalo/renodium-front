@@ -7,8 +7,8 @@
         The platform is
         {{ game.platform }}
       </p>
-      <p>{{ game.price }} <span class="tenge-span">₸</span></p>
-      <button @click="handleAddToCart">Добавить в корзину</button>
+      <p class="price">{{ game.price }} ₸</p>
+      <button class="game-btn" @click="handleAddToCart">Добавить в корзину</button>
     </div>
   </div>
 </template>
@@ -26,10 +26,29 @@ function handleAddToCart() {
 
 </script>
 
-<style>
+<style scoped>
 .game-card {
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  border: 2px solid #2A2A3A;
+  padding: 10px;
+  margin: 5px;
+  background-color: #1A1A24;
+  border-radius: 20px;
   max-width: 400px;
-  background-color: beige;
+  height: 100%;
+}
+
+.game-card:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  transform: translateY(-2px);
+}
+
+.game-btn {
+  background-color: #7C5CFC;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  border-radius: 10px;
 }
 
 .game-details {
@@ -39,9 +58,5 @@ function handleAddToCart() {
 
 .game-card img {
   height: 180px;
-}
-
-.tenge-span {
-  font-size: small;
 }
 </style>
