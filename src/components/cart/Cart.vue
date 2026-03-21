@@ -11,8 +11,8 @@
           {{ item.quantity }}
         </p>
         <span>
-          <button class="cart-btn" @click="handleDecrement(item)">-</button>
-          <button class="cart-btn" @click="handleIncrement(item)">+</button>
+          <button class="cart-btn" @click="handleDecrement(item.game.id)">-</button>
+          <button class="cart-btn" @click="handleIncrement(item.game.id)">+</button>
         </span>
       </div>
       <div>
@@ -26,7 +26,7 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-    cart: Array
+  cart: Array
 })
 
 const emit = defineEmits(["decrement-item", "increment-item"])
@@ -43,12 +43,12 @@ const totalPrice = computed(() => {
   }, 0)
 })
 
-function handleDecrement(cartItem) {
-  return emit("decrement-item", cartItem.game.id)
+function handleDecrement(gameId) {
+   emit("decrement-item", gameId)
 }
 
-function handleIncrement(cartItem) {
-  return emit("increment-item", cartItem.game.id)
+function handleIncrement(gameId) {
+   emit("increment-item", gameId)
 }
 </script>
 

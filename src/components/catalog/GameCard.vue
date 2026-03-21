@@ -1,6 +1,9 @@
 <template>
   <div class="game-card">
-    <h3>{{ game.title }}</h3>
+    <div class="game-details">
+      <h3>{{ game.title }}</h3>
+      <button class="game-btn" @click="handleAddToCart">Добавить в корзину</button>
+    </div>
     <img :src="game.image" />
     <div class="game-details">
       <p>
@@ -8,7 +11,7 @@
         {{ game.platform }}
       </p>
       <p class="price">{{ game.price }} ₸</p>
-      <button class="game-btn" @click="handleAddToCart">Добавить в корзину</button>
+      <button class="game-btn" @click="handleShowGameDetails">Посмотреть</button>
     </div>
   </div>
 </template>
@@ -18,10 +21,14 @@ const props = defineProps({
   game: Object,
 })
 
-const emit = defineEmits(["add-to-cart"])
+const emit = defineEmits(["add-to-cart", "show-game-detail"])
 
 function handleAddToCart() {
   emit("add-to-cart", props.game)
+}
+
+function handleShowGameDetails() {
+  emit("show-game-detail", props.game.id)
 }
 
 </script>
@@ -49,6 +56,7 @@ function handleAddToCart() {
   cursor: pointer;
   color: white;
   border-radius: 10px;
+  margin: 5px
 }
 
 .game-details {

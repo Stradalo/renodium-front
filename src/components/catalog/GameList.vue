@@ -1,6 +1,6 @@
 <template>
   <div class="game-list">
-    <GameCard v-for="game in games" :game="game" :key="game.id" @add-to-cart="emit('add-to-cart', $event)"/>
+    <GameCard v-for="game in games" :game="game" :key="game.id" @add-to-cart="emit('add-to-cart', $event)" @show-game-detail="emit('show-game-detail', $event)"/>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ defineProps({
   games: Array,
 })
 
-const emit = defineEmits(['add-to-cart'])
+const emit = defineEmits(['add-to-cart', 'show-game-detail'])
 </script>
   
 <style>
