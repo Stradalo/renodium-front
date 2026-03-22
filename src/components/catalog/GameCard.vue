@@ -38,10 +38,10 @@ function handleShowGameDetails() {
   box-shadow: 0 2px 8px rgba(0,0,0,.15);
   border: 2px solid #2A2A3A;
   padding: 10px;
-  margin: 5px;
+  margin: auto;
   background-color: #1A1A24;
   border-radius: 20px;
-  max-width: 400px;
+  max-width: 450px;
   height: 100%;
 }
 
