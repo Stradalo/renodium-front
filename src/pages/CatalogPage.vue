@@ -1,7 +1,7 @@
 <template>
   <h1 class="section-name">Game Catalog</h1>
   <GameList 
-    :games="mockGames" 
+    :games="games" 
     @add-to-cart="addToCart" 
     @show-game-detail="handleDetailGameRedirect"
   />
@@ -10,10 +10,11 @@
 <script setup>
 import GameList from '../components/catalog/GameList.vue'
 import { addToCart } from '../stores/useCart.js'
-import { mockGames } from '../data/games.js'
+import { getGames } from '../api/gameApi.js'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const games = getGames()
 
 function handleDetailGameRedirect(gameId) {
   router.push(`/catalog/${gameId}`)

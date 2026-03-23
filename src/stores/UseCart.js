@@ -1,28 +1,40 @@
 import { ref, computed, watch } from 'vue'
+// constants
+const CART_STORAGE_KEY = 'cart' 
+const initialCart = loadCartFromStorage(CART_STORAGE_KEY)
 
-let validCart = []
-
-const rawCart = localStorage.getItem('cart')
-
-if (rawCart) {
-  try {
-    const parsedCart = JSON.parse(rawCart)
-    validCart = Array.isArray(parsedCart) ? parsedCart : []
-  } catch {
-    validCart = []
-  }
+// storage helpers
+function saveCartToStorage(name, newCart) {
+  return localStorage.setItem(name, JSON.stringify(newCart))
 }
 
-export const cart = ref(validCart)
+function loadCartFromStorage(name) {
+  const rawCart = localStorage.getItem(name)
+  if (rawCart) {
+    try {
+      const parsedCart = JSON.parse(rawCart)
+      return Array.isArray(parsedCart) ? parsedCart : []
+    } catch {
+      return []
+    }
+  }
+  return []
+}
 
-watch (cart, (newCart) => {
-    localStorage.setItem('cart', JSON.stringify(newCart))
-  }, {deep: true})
+// state
+export const cart = ref(initialCart)
 
+// watch/persistence sync
+watch (cart,(newCart) => {
+    saveCartToStorage(CART_STORAGE_KEY, newCart)
+  }, { deep: true })
+
+// internal helpers
 function findCartItemByGameId(gameId) {
   return cart.value.find(c => c.game.id === gameId)
 }
 
+// actions
 export function addToCart(game) {
   const item = findCartItemByGameId(game.id)
   if (item) {
@@ -58,6 +70,7 @@ export function clearCart() {
   cart.value = []
 }
 
+// computed
 export const cartCount = computed(() => {
   return cart.value.reduce((total, item) => {
     return total + item.quantity

@@ -21,11 +21,11 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { mockGames } from '../data/games';
+import { getGameById } from '@/api/gameApi';
 
 const route = useRoute()
 const routeGameId = Number(route.params.id)
-const game = mockGames.find(g => g.id === routeGameId)
+const game = getGameById(routeGameId)
 
 </script>
 
