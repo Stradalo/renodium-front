@@ -12,9 +12,14 @@ import GameList from '../components/catalog/GameList.vue'
 import { addToCart } from '../stores/useCart.js'
 import { getGames } from '../api/gameApi.js'
 import { useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
 
+onMounted(async () => {
+  games.value = await getGames()
+})
+
+const games = ref([])
 const router = useRouter()
-const games = getGames()
 
 function handleDetailGameRedirect(gameId) {
   router.push(`/catalog/${gameId}`)

@@ -22,10 +22,19 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import { getGameById } from '@/api/gameApi';
+import { onMounted, ref } from 'vue';
+
+onMounted (async () => {
+    try {
+        game.value = await getGameById(routeGameId)
+    } catch {
+        console.log("bad request")
+    }
+})
 
 const route = useRoute()
 const routeGameId = Number(route.params.id)
-const game = getGameById(routeGameId)
+const game = ref(null)
 
 </script>
 
