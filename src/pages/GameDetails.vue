@@ -1,6 +1,10 @@
 <template>
     <div class="game-detail-text">
-        <div v-if="game">
+        <div v-if="gameLoading">
+            <h2 class="section-name">Game is loading</h2>
+            <p> Game is loading, please wait </p>
+        </div>
+        <div v-else-if="game">
             <h2 class="section-name">About the game</h2>
             <h3>{{ game.title }}</h3>
             <div>
@@ -13,8 +17,8 @@
             </div>
         </div>
         <div v-else>
-            <h2 class="section-name">This game does not exist</h2>
-            <p> Game not found </p>
+            <h2 class="section-name">Game did not load</h2>
+            <p> Game not found or there might be error </p>
         </div>
     </div>
 </template>
@@ -26,13 +30,17 @@ import { onMounted, ref } from 'vue';
 
 onMounted (async () => {
     try {
+        gameLoading.value = true
         game.value = await getGameById(routeGameId)
-    } catch {
-        console.log("bad request")
+    } catch (error) {
+        console.error("There was an error:", error)
+    } finally {
+        gameLoading.value = false
     }
 })
 
 const route = useRoute()
+const gameLoading = ref(false);
 const routeGameId = Number(route.params.id)
 const game = ref(null)
 
