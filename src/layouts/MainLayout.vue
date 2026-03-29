@@ -12,6 +12,9 @@
         <li class="navbar-item">
           <RouterLink to="/login">Login</RouterLink>
         </li>
+        <li class="navbar-item">
+          <RouterLink to="/catalog/create">Create Game</RouterLink>
+        </li>
       </ul>
     </nav>
   </header>

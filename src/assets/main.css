@@ -57,3 +57,28 @@ nav {
 .muted-text {
   color: var(--text-muted);
 }
+
+.game-btn {
+  background-color: #7C5CFC;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  border-radius: 10px;
+  margin: 5px
+}
+
+.game-input {
+  width: 95%;
+  height: 40px;
+  margin: 10px;
+  background-color: var(--surface);
+}
+
+.game-input::placeholder {
+  color: var(--highlight);
+  opacity: 1;
+}
+
+.game-input {
+  color: var(--highlight);
+}

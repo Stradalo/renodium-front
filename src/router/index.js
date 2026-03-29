@@ -4,6 +4,7 @@ import CatalogPage from '../pages/CatalogPage.vue'
 import LoginPage from '../pages/LoginPage.vue'
 import MainLayout from '../layouts/MainLayout.vue'
 import GameDetails from '../pages/GameDetails.vue'
+import CreateGamePage from '@/pages/CreateGamePage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,7 +15,8 @@ const router = createRouter({
       children: [
         { path: '', component: HomePage },
         { path: 'catalog', component: CatalogPage },
-        { path: 'catalog/:id', component: GameDetails }
+        { path: 'catalog/:id', component: GameDetails },
+        { path: 'catalog/create', component: CreateGamePage }
       ],
     },
     {

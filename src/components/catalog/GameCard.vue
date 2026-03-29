@@ -50,15 +50,6 @@ function handleShowGameDetails() {
   transform: translateY(-2px);
 }
 
-.game-btn {
-  background-color: #7C5CFC;
-  display: inline-block;
-  cursor: pointer;
-  color: white;
-  border-radius: 10px;
-  margin: 5px
-}
-
 .game-details {
   display: flex;
   justify-content: space-between;
