@@ -1,17 +1,17 @@
 :root {
-  --bg:         #0f0f13;  /* page background */
-  --surface:    #1a1a24;  /* cards, navbar */
-  --border:     #2a2a3a;  /* borders, hover states */
-  --text:       #ffffff;  /* primary text */
-  --text-muted: #888888;  /* secondary text */
+  --bg: #0f0f13; /* page background */
+  --surface: #1a1a24; /* cards, navbar */
+  --border: #2a2a3a; /* borders, hover states */
+  --text: #ffffff; /* primary text */
+  --text-muted: #888888; /* secondary text */
 
-  --accent:     #7c5cfc;  /* buttons, links */
-  --highlight:  #00d4ff;  /* active states */
-  --price:      #22c55e;  /* prices, in stock */
-  --sale:       #f59e0b;  /* sale badges, discounts */
+  --accent: #7c5cfc; /* buttons, links */
+  --highlight: #00d4ff; /* active states */
+  --price: #22c55e; /* prices, in stock */
+  --sale: #f59e0b; /* sale badges, discounts */
 
   --font-heading: 'Oxanium', sans-serif;
-  --font-body:    'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
 }
 
 body {
@@ -20,7 +20,10 @@ body {
   background-color: black;
 }
 
-h1, h2, h3, .game-title {
+h1,
+h2,
+h3,
+.game-title {
   font-family: var(--font-heading);
 }
 
@@ -37,7 +40,7 @@ a {
   color: var(--price);
 }
 
-#wrapper{
+#wrapper {
   max-width: 1350px;
   margin: 20px auto;
   background-color: var(--bg);
@@ -51,7 +54,7 @@ a {
 }
 
 nav {
-	border-bottom: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
 }
 
 .muted-text {
@@ -59,16 +62,21 @@ nav {
 }
 
 .game-btn {
-  background-color: #7C5CFC;
+  background-color: #7c5cfc;
   display: inline-block;
   cursor: pointer;
   color: white;
   border-radius: 10px;
-  margin: 5px
+  margin: 5px;
+}
+
+.game-detail-text {
+  margin-left: 5px;
 }
 
 .game-input {
-  width: 95%;
+  width: 97%;
+  max-width: 1300px;
   height: 40px;
   margin: 10px;
   background-color: var(--surface);
