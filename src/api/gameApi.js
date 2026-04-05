@@ -1,6 +1,6 @@
 import { mockGames } from "@/data/games";
 
-const serverAdress = 'https://localhost:5000' 
+const serverAdress = 'http://184.174.36.242:5000' 
 
 export async function getGames() {
     const response = await fetch(serverAdress + "/Games");

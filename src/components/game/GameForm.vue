@@ -63,8 +63,11 @@ const emit = defineEmits(['save-game'])
 const trim = (input) => input.trim()
 
 const normalizePrice = (input) => {
-  input = input.trim().replace(',', '.')
-  if (/^\d+\.?(\d+)?$/.test(input)) {
+  if (input === null || input === undefined || input === "") {
+    return null
+  }
+  input = input.toString().trim().replace(',', '.')
+  if (/^\d+(\.\d\d?)?$/.test(input)) {
     return parseFloat(input)
   }
   return null
@@ -72,21 +75,21 @@ const normalizePrice = (input) => {
 
 function validateForm() {
   errors.value = []
-  const trimedTitle = trim(title.value)
-  const trimedPrice = trim(price.value)
-  const trimedPlatform = trim(platform.value)
-  if (!trimedTitle) {
+  const trimmedTitle = trim(title.value)
+  const rawPrice = price.value
+  const trimmedPlatform = trim(platform.value)
+  if (!trimmedTitle) {
     errors.value.push('Title is required!')
   }
-  if (!trimedPrice) {
+  if (rawPrice === null || rawPrice === undefined || rawPrice === "") {
     errors.value.push('Price is required!')
   } else {
-    const correctPrice = normalizePrice(trimedPrice)
-    if (correctPrice === null) {
+    const normalizedPrice = normalizePrice(rawPrice)
+    if (normalizedPrice === null) {
       errors.value.push('Price must be 0 or greater, up to 2 decimal places')
     }
   }
-  if (!trimedPlatform) {
+  if (!trimmedPlatform) {
     errors.value.push('Platform is required!')
   }
   if (errors.value.length > 0) {
