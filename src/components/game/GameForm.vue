@@ -41,13 +41,17 @@
         </option>
       </select>
 
-      <button class="game-btn" type="submit">Create game</button>
+      <button class="game-btn" type="submit" :disabled="isSubmitting">Create game</button>
     </form>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+
+const props = defineProps({
+  isSubmitting: Boolean,
+})
 
 const platformOptions = ['PC', 'PlayStation 5', 'Xbox', 'Nintendo Switch']
 
@@ -63,7 +67,7 @@ const emit = defineEmits(['save-game'])
 const trim = (input) => input.trim()
 
 const normalizePrice = (input) => {
-  if (input === null || input === undefined || input === "") {
+  if (input === null || input === undefined || input === '') {
     return null
   }
   input = input.toString().trim().replace(',', '.')
@@ -81,7 +85,7 @@ function validateForm() {
   if (!trimmedTitle) {
     errors.value.push('Title is required!')
   }
-  if (rawPrice === null || rawPrice === undefined || rawPrice === "") {
+  if (rawPrice === null || rawPrice === undefined || rawPrice === '') {
     errors.value.push('Price is required!')
   } else {
     const normalizedPrice = normalizePrice(rawPrice)
