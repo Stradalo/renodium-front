@@ -12,13 +12,13 @@
         type="text"
         maxlength="200"
         placeholder="Write title of the game"
-        v-model="title"
+        v-model="game.title"
       />
       <textarea
         class="game-input"
         maxlength="10000"
         placeholder="Write details of the game"
-        v-model="details"
+        v-model="game.details"
       >
       </textarea>
       <input
@@ -26,15 +26,15 @@
         type="number"
         step="0.01"
         placeholder="Write price of the game"
-        v-model="price"
+        v-model="game.price"
       />
       <input
         class="game-input"
         type="url"
         placeholder="Paste url of the image for the game"
-        v-model="image"
+        v-model="game.image"
       />
-      <select class="game-input" v-model="platform">
+      <select class="game-input" v-model="game.platform">
         <option value="">Choose a platform</option>
         <option v-for="option in platformOptions" :key="option" :value="option">
           {{ option }}
@@ -55,11 +55,14 @@ const props = defineProps({
 
 const platformOptions = ['PC', 'PlayStation 5', 'Xbox', 'Nintendo Switch']
 
-const title = ref('')
-const details = ref('')
-const price = ref('')
-const image = ref('')
-const platform = ref('')
+const game = ref({
+  title: '',
+  details: '',
+  price: '',
+  image: '',
+  platform: ''
+})
+
 const errors = ref([])
 
 const emit = defineEmits(['save-game'])
@@ -79,9 +82,9 @@ const normalizePrice = (input) => {
 
 function validateForm() {
   errors.value = []
-  const trimmedTitle = trim(title.value)
-  const rawPrice = price.value
-  const trimmedPlatform = trim(platform.value)
+  const trimmedTitle = trim(game.value.title)
+  const rawPrice = game.value.price
+  const trimmedPlatform = trim(game.value.platform)
   if (!trimmedTitle) {
     errors.value.push('Title is required!')
   }
@@ -107,11 +110,11 @@ function handleSubmit() {
     return
   }
   const payload = {
-    title: trim(title.value),
-    details: trim(details.value),
-    price: normalizePrice(price.value),
-    image: trim(image.value),
-    platform: trim(platform.value),
+    title: trim(game.value.title),
+    details: trim(game.value.details),
+    price: normalizePrice(game.value.price),
+    image: trim(game.value.image),
+    platform: trim(game.value.platform),
   }
   emit('save-game', payload)
 }

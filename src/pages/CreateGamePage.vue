@@ -1,5 +1,9 @@
 <template>
   <h1 class="section-name">Game Creation</h1>
+  <div v-if="submitError != null">
+    <h2>Could not create game</h2>
+    <p>{{ submitError.message }}</p>
+  </div>
   <GameForm :isSubmitting="isSubmitting" @save-game="handleGameCreation" />
 </template>
 
@@ -22,11 +26,18 @@ async function handleGameCreation(payload) {
   submitError.value = null
 
   try {
-    let createdGame = await createGame(payload)
-    router.push(`/catalog/${createdGame.id}`)
+    const createdGame = await createGame(payload)
+    if (createdGame.id != null) {
+      router.push(`/catalog/${createdGame.id}`)
+    } else {
+      submitError.value = {
+        message: "Game was created, but server returned invalid response.",
+        status: 405,
+        field: "id"
+      }
+    }
   } catch (e) {
     submitError.value = e
-    alert(submitError.value.message)
   } finally {
     isSubmitting.value = false
   }

@@ -34,3 +34,18 @@ export async function createGame(payload) {
     const data = await response.json()
     return data
 }
+
+export async function updateGame(gameId, payload) {
+    const response = await fetch(serverAdress + `/Games/${gameId}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`)
+    }
+    const data = await response.json()
+    return data
+}

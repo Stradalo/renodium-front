@@ -5,7 +5,7 @@
 
 <script setup>
 import GameList from '../components/catalog/GameList.vue'
-import { addToCart } from '../stores/UseCart.js'
+import { addToCart } from '../stores/useCart.js'
 import { getGames } from '../api/gameApi.js'
 import { useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
