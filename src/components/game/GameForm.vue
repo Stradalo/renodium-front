@@ -41,7 +41,7 @@
         </option>
       </select>
 
-      <button class="game-btn" type="submit" :disabled="isSubmitting">Create game</button>
+      <button class="game-btn" type="submit" :disabled="isSubmitting">{{ submitLabel }}</button>
     </form>
   </div>
 </template>
@@ -51,23 +51,28 @@ import { ref } from 'vue'
 
 const props = defineProps({
   isSubmitting: Boolean,
+  submitLabel: String,
+  initialGame: Object,
 })
 
 const platformOptions = ['PC', 'PlayStation 5', 'Xbox', 'Nintendo Switch']
 
 const game = ref({
-  title: '',
-  details: '',
-  price: '',
-  image: '',
-  platform: ''
+  title: props.initialGame?.title ?? '',
+  details: props.initialGame?.details ?? '',
+  price: props.initialGame?.price ?? '',
+  image: props.initialGame?.image ?? '',
+  platform: props.initialGame?.platform ?? ''
 })
 
 const errors = ref([])
 
 const emit = defineEmits(['save-game'])
 
-const trim = (input) => input.trim()
+const trim = (input) => {
+  input = input ?? ''
+  return input.trim()
+}
 
 const normalizePrice = (input) => {
   if (input === null || input === undefined || input === '') {

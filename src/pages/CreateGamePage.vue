@@ -4,7 +4,11 @@
     <h2>Could not create game</h2>
     <p>{{ submitError.message }}</p>
   </div>
-  <GameForm :isSubmitting="isSubmitting" @save-game="handleGameCreation" />
+  <GameForm 
+    :isSubmitting="isSubmitting" 
+    :submitLabel="submitLabel" 
+    @save-game="handleGameCreation" 
+  />
 </template>
 
 <script setup>
@@ -17,8 +21,14 @@ const isSubmitting = ref(false)
 const submitError = ref(null)
 const router = useRouter()
 
+const submitLabel = "Create Game"
+
 async function handleGameCreation(payload) {
   if (isSubmitting.value) {
+    submitError.value = {
+      message: "Already submitting",
+      status: 405,
+    }
     return
   }
 

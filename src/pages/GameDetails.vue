@@ -10,10 +10,11 @@
             <div>
                 <div class="game-detail-image">
                     <img :src="game.image" alt="game image"/>
-                    <p>{{ game.details }} </p>
+                    <p> {{ game.details }} </p>
                 </div>
                 <p class="muted-text">{{ game.platform }}</p>
                 <p class="price">{{ game.price }} ₸</p>
+                <button class="game-btn" @click="editGame">Edit Game</button>
             </div>
         </div>
         <div v-else>
@@ -24,7 +25,7 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { getGameById } from '@/api/gameApi';
 import { onMounted, ref } from 'vue';
 
@@ -40,9 +41,14 @@ onMounted (async () => {
 })
 
 const route = useRoute()
-const gameLoading = ref(false);
+const router = useRouter()
+const gameLoading = ref(true);
 const routeGameId = Number(route.params.id)
 const game = ref(null)
+
+function editGame() {
+    router.push(`/catalog/update/${routeGameId}`)
+}
 
 </script>
 
