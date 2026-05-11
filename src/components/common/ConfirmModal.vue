@@ -4,7 +4,7 @@
             <p class="modal-text">
                 {{ message }}
             </p>
-            <button class="confirm modal-btn game-btn" @click="handleConfirm">Confirm</button>
+            <button class="danger modal-btn game-btn" @click="handleConfirm">Confirm</button>
             <button class="modal-btn game-btn" @click="handleCancel">Cancel</button>
         </div>
     </div>
@@ -57,9 +57,5 @@ function handleCancel() {
 
 .modal-btn {
     padding: 8px 20px;
-}
-
-.confirm {
-    background-color: var(--danger);
 }
 </style>

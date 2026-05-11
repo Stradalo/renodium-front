@@ -91,3 +91,13 @@ nav {
 .game-input {
   color: var(--highlight);
 }
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.danger {
+  background-color: var(--danger);
+}

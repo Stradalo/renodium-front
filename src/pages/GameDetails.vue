@@ -18,7 +18,7 @@
                     <p class="price">{{ game.price }} ₸</p>
                 </div>
 
-                <div class="game-actions">
+                <div class="actions">
                     <button class="game-btn" @click="editGame">Edit Game</button>
                     <button class="danger game-btn" @click="showModal = true">Delete Game</button>
                 </div>
@@ -104,13 +104,5 @@ async function handleDelete() {
 
 .game-detail-info {
     margin-top: 20px;
-}
-
-.game-actions {
-    margin-top: 20px;
-}
-
-.danger {
-    background-color: var(--danger);
 }
 </style>

@@ -60,6 +60,7 @@ export function decrementCartGame(id) {
   const index = cart.value.indexOf(item)
   if (item.quantity === 1) {
     cart.value.splice(index, 1)
+    return
   }
   else {
     item.quantity -= 1
