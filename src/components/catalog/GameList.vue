@@ -23,5 +23,6 @@ const emit = defineEmits(['add-to-cart', 'show-game-detail'])
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  padding: 10px;
 }
 </style>

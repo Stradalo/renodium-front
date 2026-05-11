@@ -49,3 +49,12 @@ export async function updateGame(gameId, payload) {
     const data = await response.json()
     return data
 }
+
+export async function deleteGame(gameId) {
+    const response = await fetch(serverAdress + `/Games/${gameId}`, {
+        method: "DELETE"
+    })
+    if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`)
+    }
+}

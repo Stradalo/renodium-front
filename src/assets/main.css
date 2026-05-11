@@ -9,6 +9,7 @@
   --highlight: #00d4ff; /* active states */
   --price: #22c55e; /* prices, in stock */
   --sale: #f59e0b; /* sale badges, discounts */
+  --danger: #ef4444;
 
   --font-heading: 'Oxanium', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -62,7 +63,7 @@ nav {
 }
 
 .game-btn {
-  background-color: #7c5cfc;
+  background-color: var(--accent);
   display: inline-block;
   cursor: pointer;
   color: white;
@@ -71,7 +72,7 @@ nav {
 }
 
 .game-detail-text {
-  margin-left: 5px;
+  padding: 20px;
 }
 
 .game-input {

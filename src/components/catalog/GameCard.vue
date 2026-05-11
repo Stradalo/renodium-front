@@ -7,7 +7,6 @@
     <img :src="game.image" />
     <div class="game-details">
       <p>
-        The platform is
         {{ game.platform }}
       </p>
       <p class="price">{{ game.price }} ₸</p>
@@ -43,6 +42,7 @@ function handleShowGameDetails() {
   border-radius: 20px;
   max-width: 450px;
   height: 100%;
+  transition: transform 0.2s ease;
 }
 
 .game-card:hover {
@@ -57,5 +57,7 @@ function handleShowGameDetails() {
 
 .game-card img {
   height: 180px;
+  width: 100%;
+  object-fit: cover;
 }
 </style>
