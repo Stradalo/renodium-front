@@ -1,5 +1,3 @@
-import { mockGames } from "@/data/games";
-
 const serverAdress = 'http://184.174.36.242:5000' 
 
 export async function getGames() {
@@ -16,7 +14,7 @@ export async function getGameById(gameId) {
     if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`)
     }
-    const data = response.json()
+    const data = await response.json()
     return data
 }
 
@@ -26,6 +24,7 @@ export async function createGame(payload) {
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: "include",
         body: JSON.stringify(payload)
     })
     if (!response.ok) {
@@ -41,6 +40,7 @@ export async function updateGame(gameId, payload) {
         headers: {
             'Content-Type': 'application/json'
         },
+        credentials: "include",
         body: JSON.stringify(payload)
     })
     if (!response.ok) {
@@ -52,7 +52,8 @@ export async function updateGame(gameId, payload) {
 
 export async function deleteGame(gameId) {
     const response = await fetch(serverAdress + `/Games/${gameId}`, {
-        method: "DELETE"
+        method: "DELETE",
+        credentials: "include",
     })
     if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`)
