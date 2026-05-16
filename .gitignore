@@ -40,3 +40,4 @@ __screenshots__/
 
 .env.development
 .env.production
+.vercel
