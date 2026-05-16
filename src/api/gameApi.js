@@ -1,4 +1,4 @@
-const serverAdress = 'http://184.174.36.242:5000' 
+const serverAdress = import.meta.env.VITE_API_URL
 
 export async function getGames() {
     const response = await fetch(serverAdress + "/Games");
