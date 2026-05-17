@@ -1,14 +1,13 @@
 <template>
   <h1 class="section-name">Game Creation</h1>
-  <div v-if="submitError != null">
-    <h2>Could not create game</h2>
-    <p>{{ submitError.message }}</p>
-  </div>
   <GameForm 
     :isSubmitting="isSubmitting" 
     :submitLabel="submitLabel" 
     @save-game="handleGameCreation" 
   />
+  <div v-if="submitError != null">
+    <ErrorModal :title="errorTitle" :error="submitError.message" @clear-error="submitError = null"/>
+  </div>
 </template>
 
 <script setup>
@@ -16,6 +15,9 @@ import { ref } from 'vue'
 import { createGame } from '@/api/gameApi'
 import GameForm from '../components/game/GameForm.vue'
 import { useRouter } from 'vue-router'
+import ErrorModal from '@/components/common/ErrorModal.vue'
+
+const errorTitle = "Could not create game";
 
 const isSubmitting = ref(false)
 const submitError = ref(null)
@@ -33,7 +35,6 @@ async function handleGameCreation(payload) {
   }
 
   isSubmitting.value = true
-  submitError.value = null
 
   try {
     const createdGame = await createGame(payload)

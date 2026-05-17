@@ -17,8 +17,7 @@
             <button class="game-btn" type="submit" :disabled="isSubmitting">Log in</button>
         </form>
         <div v-if="submitError != null">
-            <h2>Could not Log in</h2>
-            <p>{{ submitError.message }}</p>
+            <ErrorModal :title="errorTitle" :error="submitError.message" @clear-error="submitError = null"/>
         </div>
     </div>
 </template>
@@ -28,6 +27,9 @@ import { ref } from "vue"
 import { login } from '@/stores/useAuth';
 import { loginRequest } from '@/api/loginApi';
 import { useRouter } from 'vue-router'
+import ErrorModal from "@/components/common/ErrorModal.vue";
+
+const errorTitle = "Could not Log in"
 
 const isSubmitting = ref(false)
 const submitError = ref(null)

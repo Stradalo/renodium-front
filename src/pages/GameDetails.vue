@@ -25,22 +25,24 @@
             </div>
         </div>
         <div v-else>
-            <h2 class="section-name">Game did not load</h2>
-            <p> Game not found or there might be error </p>
+            <h2>Unexpected error</h2>
         </div>
     </div>
 
-   <div v-if="showModal">
+    <div v-if="loadError != null">
+        <ErrorModal :title="loadErrorTitle" :error="loadError.message" @clear-error="loadError = null"/>
+    </div>
+
+    <div v-if="showModal">
         <ConfirmModal 
             :message="`Are you sure you want to delete ${game.title}?`"
             @confirm="handleDelete"
             @cancel="showModal = false"
         />
-   </div>
+    </div>
 
-   <div v-if="deleteError != null">
-        <h2>Could not delete game</h2>
-        <p>{{ deleteError.message }}</p>
+    <div v-if="deleteError != null">
+        <ErrorModal :title="deleteErrorTitle" :error="deleteError.message" @clear-error="deleteError = null"/>
     </div>
 </template>
 
@@ -51,13 +53,17 @@ import { onMounted, ref } from 'vue';
 import { deleteGame } from '@/api/gameApi';
 import { user } from '@/stores/useAuth';
 import ConfirmModal from '@/components/common/ConfirmModal.vue';
+import ErrorModal from '@/components/common/ErrorModal.vue';
+
+const loadErrorTitle = "Could not load game"
+const deleteErrorTitle = "Could not delete game"
 
 onMounted (async () => {
     try {
         gameLoading.value = true
         game.value = await getGameById(routeGameId)
-    } catch (error) {
-        console.error("There was an error:", error)
+    } catch (e) {
+        loadError.value = e
     } finally {
         gameLoading.value = false
     }
@@ -65,8 +71,9 @@ onMounted (async () => {
 
 const route = useRoute()
 const router = useRouter()
-const gameLoading = ref(true);
-const showModal = ref(false);
+const gameLoading = ref(true)
+const loadError = ref(null)
+const showModal = ref(false)
 const routeGameId = Number(route.params.id)
 const game = ref(null)
 const deleteError = ref(null)

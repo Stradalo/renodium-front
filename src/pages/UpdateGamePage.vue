@@ -1,8 +1,7 @@
 <template>
   <h1 class="section-name">Game Update</h1>
   <div v-if="loadError != null">
-    <h2>Could not load game</h2>
-    <p>{{ loadError.message }}</p>
+    <ErrorModal :title="loadErrorTitle" :error="loadError.message" @clear-error="loadError = null"/>
   </div>
   <div v-if="isLoading === false && loadError === null">
     <GameForm 
@@ -13,8 +12,7 @@
     />
   </div>
   <div v-if="submitError != null">
-    <h2>Could not update game</h2>
-    <p>{{ submitError.message }}</p>
+    <ErrorModal :title="submitErrorTitle" :error="submitError.message" @clear-error="submitError = null"/>
   </div>
 </template>
 
@@ -23,10 +21,13 @@ import { onMounted, ref } from 'vue'
 import { getGameById, updateGame } from '@/api/gameApi'
 import GameForm from '../components/game/GameForm.vue'
 import { useRoute, useRouter } from 'vue-router'
+import ErrorModal from '@/components/common/ErrorModal.vue'
+
+const loadErrorTitle = "Could not load game"
+const submitErrorTitle = "Could not update game"
 
 onMounted (async () => {
   isLoading.value = true
-  loadError.value = null
   
   try {
     if (!Number.isInteger(gameId) || gameId <= 0) {
@@ -72,7 +73,6 @@ async function handleGameUpdate(payload) {
   }
 
   isSubmitting.value = true
-  submitError.value = null
 
   try {
     const updatedGame = await updateGame(gameId, payload)
